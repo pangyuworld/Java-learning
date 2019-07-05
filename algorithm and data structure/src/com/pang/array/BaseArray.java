@@ -10,11 +10,11 @@ import java.util.Arrays;
  * @description: 数组基本操作(增删改查)的实现，参考《漫画算法》p21-p32
  * @date 2019/7/4 11:00
  */
-public class BaseArray {
+public class BaseArray<E> {
     /**
      * 对象内置的数组
      */
-    private int[] array;
+    private Object[] array;
     /**
      * 数组实际大小
      */
@@ -28,7 +28,7 @@ public class BaseArray {
      * @date 2019/7/4
      */
     public BaseArray(int arraySize) {
-        this.array = new int[arraySize];
+        this.array =  new Object[arraySize];
         size = 0;
     }
 
@@ -40,7 +40,7 @@ public class BaseArray {
      * @author pang
      * @date 2019/7/4
      */
-    public void insert(int element, int index) throws Exception {
+    public void insert(E element, int index) throws Exception {
         // 处理越界
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("插入元素时，数组越界");
@@ -81,13 +81,14 @@ public class BaseArray {
      * @author pang
      * @date 2019/7/4
      */
-    public int get(int index) throws Exception {
+    @SuppressWarnings("unchecked")
+    public E get(int index) throws Exception {
         // 处理数组越界
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("获取数组元素时，数组越界");
         }
         // 得到数组元素
-        return this.array[index];
+        return (E)this.array[index];
     }
 
     /**
@@ -98,7 +99,7 @@ public class BaseArray {
      * @author pang
      * @date 2019/7/4
      */
-    public void update(int element, int index) throws Exception {
+    public void update(E element, int index) throws Exception {
         // 处理数组越界
         if (index < 0 || index > this.size) {
             throw new IndexOutOfBoundsException("获取数组元素时，数组越界");
@@ -137,7 +138,7 @@ public class BaseArray {
      * @date 2019/7/4
      */
     private void resize() {
-        int[] arrayTemp = new int[2 * this.size];
+        Object[] arrayTemp =  new Object[2 * this.size];
         System.arraycopy(this.array, 0, arrayTemp, 0, this.size);
         this.array = arrayTemp;
     }
@@ -149,8 +150,9 @@ public class BaseArray {
      * @author pang
      * @date 2019/7/4
      */
-    public int[] getArray() {
-        return array;
+    @SuppressWarnings("unchecked")
+    public E[] getArray() {
+        return (E[])array;
     }
 
     /**
