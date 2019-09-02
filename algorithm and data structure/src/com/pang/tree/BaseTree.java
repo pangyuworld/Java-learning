@@ -1,5 +1,7 @@
 package com.pang.tree;
 
+import com.pang.stack.BaseStack;
+
 /**
  * @author pang
  * @version V1.0
@@ -52,6 +54,8 @@ public class BaseTree {
         new Node(node, this.isLeft, data);
         // 初始化临时节点
         node = this.topFather;
+        // 树的节点数量+1
+        this.treeSize++;
         // 返回其本身，链式添加
         return this;
     }
@@ -161,11 +165,70 @@ public class BaseTree {
         System.out.print(base.getData() + " ");
     }
 
+    /**
+     * 使用栈完成二叉树先序遍历
+     *
+     * @param base 父节点
+     * @author pang
+     * @date 2019/9/2
+     */
+    public void preOrderTraveralByStatic(Node base) {
+        // 用自己实现的栈创建一个可以存储节点的栈
+        BaseStack<Node> stack = new BaseStack<>(this.treeSize);
+        // 如果开始的根节点为空或者栈为空都会使死循环终止
+        while (base != null || !stack.isEmpty()) {
+            // 下面有个子循环，是向左递归的思路，所以只要有左子节点就不会停
+            // 如果因为这个节点等于了左节点且为空，则停止循环，执行循环下面的语句
+            while (base != null) {
+                // 输出该节点信息
+                System.out.print(base.getData() + " ");
+                // 将输出过的节点压入栈
+                stack.push(base);
+                // 这是做递归思路，所以让根节点指向他的左节点，然后再回到循环开始进行判断
+                base = base.getLeft();
+            }
+            // 当然，栈不能为空，如果栈为空就代表递归到了终点了
+            if (!stack.isEmpty()) {
+                // 既然左节点为空了，那么我们就让他成为右节点吧
+                // 注意这里的pop()是从栈中取出且删除栈顶元素
+                base = stack.pop().getRight();
+            }
+        }
+    }
+
+    /**
+     * 使用栈完成中序遍历
+     *
+     * @param base 根节点
+     * @author pang
+     * @date 2019/9/2
+     */
+    public void inOrderTraveralByStatic(Node base) {
+        BaseStack<Node> stack = new BaseStack<>(this.treeSize);
+        // 具体注释细节看先序遍历即可
+        // 根节点不能为空或者栈不为空
+        while (base != null || !stack.isEmpty()) {
+            while (base != null) {
+                stack.push(base);
+                base = base.getLeft();
+            }
+            base = stack.pop();
+            System.out.print(base.getData() + " ");
+            if (!stack.isEmpty() || base.getRight() != null) {
+                // 这里栈为空在获得顶点6的时候就停了
+                // 但是如果加上判断右子节点是不是为空又会导致当base为8的时候直接无法运行下面的语句
+                base = base.getRight();
+            } else {
+                // 所以，在这里加上一个else语句作为结尾的判断就好了啊
+                base = base.getRight();
+            }
+        }
+    }
 
     /**
      * 使用内部类构建节点
      */
-    class Node {
+    private class Node {
         /**
          * 节点数据
          */
@@ -259,11 +322,16 @@ public class BaseTree {
     public static void main(String... args) {
         BaseTree tree = new BaseTree();
         tree.add(6).add(3).add(4).add(2).add(1).add(8).add(7).add(9);
+        // tree.add(6).add(3).add(8);
         // System.out.println(tree.find(6));
         System.out.println("先序遍历");
         tree.preOrderTraveral(tree.getTopFather());
+        System.out.println("\n先序遍历（栈版本）");
+        tree.preOrderTraveralByStatic(tree.getTopFather());
         System.out.println("\n中序遍历");
         tree.inOrderTraveral(tree.getTopFather());
+        System.out.println("\n中序遍历（栈版本）");
+        tree.inOrderTraveralByStatic(tree.getTopFather());
         System.out.println("\n后序遍历");
         tree.postOrderTraveral(tree.getTopFather());
     }
