@@ -42,11 +42,27 @@ public class BaseStack<E> {
     @SuppressWarnings("unchecked")
     public E pop() {
         // 空栈异常处理
-        if (this.size < 0) {
+        if (this.size <= 0) {
             throw new IndexOutOfBoundsException("栈为空");
         }
         // 得到栈顶元素且size-1
-        return (E)this.stack[(this.size--)-1];
+        return (E) this.stack[(this.size--) - 1];
+    }
+
+    /**
+     * 仅仅是获得栈顶元素的值，不删除栈顶元素
+     *
+     * @return E
+     * @author pang
+     * @date 2019/9/2
+     */
+    public E top() {
+        // 空栈异常处理
+        if (this.size <= 0) {
+            throw new IndexOutOfBoundsException("栈为空");
+        }
+        // 得到栈顶元素且size-1
+        return (E) this.stack[this.size - 1];
     }
 
     /**
@@ -62,7 +78,22 @@ public class BaseStack<E> {
             throw new IndexOutOfBoundsException("栈为满");
         }
         // 入栈操作
-        this.stack[(++this.size)-1] = element;
+        this.stack[(++this.size) - 1] = element;
+    }
+
+    /**
+     * 判断栈是否为空
+     *
+     * @return boolean
+     * @author pang
+     * @date 2019/9/2
+     */
+    public boolean isEmpty() {
+        if (this.size <= 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

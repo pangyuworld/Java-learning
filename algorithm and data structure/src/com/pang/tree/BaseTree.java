@@ -226,6 +226,49 @@ public class BaseTree {
     }
 
     /**
+     * 使用栈实现后续遍历
+     *
+     * @param base 根节点
+     * @author pang
+     * @date 2019/9/2
+     */
+    public void postOrderTraveralByStatic(Node base) {
+        BaseStack<Node> stack = new BaseStack<>(this.treeSize);
+        // 这里创建一个临时变量是要保存最近一次访问的节点，一般就是某个根节点的右节点
+        Node node = null;
+        while (base != null || !stack.isEmpty()) {
+            // 向左查找到最底一层叶子节点
+            if (base != null) {
+                stack.push(base);
+                base = base.getLeft();
+            } else {
+                // 当最左侧叶子节点没有子节点以后，就开始考虑它有没有右节点
+                // 首先是得到这个左叶子节点
+                base = stack.top();
+                // 这里进行判断，首先是判断他有没有右子节点，如果有右子节点，那么上一次访问的右子节点是不是它
+                if (base.getRight() != null && base.getRight() != node) {
+                    // 这里已经证明我们是第一次访问这个右子节点
+                    // 所以把这个右子节点压入栈
+                    base = base.getRight();
+                    stack.push(base);
+                    // 然后获得他的左子节点（因为总有一些奇形怪状的树），然后再返回循环继续判断
+                    base = base.getLeft();
+                } else {
+                    // 代码执行到这里是因为这个节点可能没有右子节点或者上次一已经访问过右子节点了
+                    // 先把栈顶元素取出来
+                    stack.pop();
+                    // 输出当前元素
+                    System.out.print(base.getData() + " ");
+                    // 然后把临时变量保存为刚刚输出的临时变量
+                    node = base;
+                    // 这里置空是因为如果不置空的话，第一层判断会直接把最左叶子节点压入栈
+                    base = null;
+                }
+            }
+        }
+    }
+
+    /**
      * 使用内部类构建节点
      */
     private class Node {
@@ -334,5 +377,7 @@ public class BaseTree {
         tree.inOrderTraveralByStatic(tree.getTopFather());
         System.out.println("\n后序遍历");
         tree.postOrderTraveral(tree.getTopFather());
+        System.out.println("\n后序遍历（栈版本）");
+        tree.postOrderTraveralByStatic(tree.getTopFather());
     }
 }
