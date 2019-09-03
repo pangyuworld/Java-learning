@@ -16,18 +16,18 @@ public class BaseQueue<E> {
     /**
      * 队列首的位置
      */
-    private int tail;
+    private int head;
     /**
      * 队列尾的位置
      */
-    private int head;
+    private int tail;
     /**
      * 队列的最大容量
      */
     private int size;
 
     public BaseQueue(int queueSize) {
-        this.size = queueSize;
+        this.size = queueSize+1;
         this.queue = new Object[this.size];
         tail = 0;
         head = 0;
@@ -64,12 +64,32 @@ public class BaseQueue<E> {
         int realTail = this.tail % this.size;
         int realHead = this.head % this.size;
         // 如果队列为空，这里注意不用realHead是因为有可能realHead是最后一个位置
-        if ((this.head + 1) % this.size == realTail) {
+        if ((this.head ) % this.size == realTail) {
             throw new IndexOutOfBoundsException("从队列取出元素时候元素为空");
         }
         // 头部指针+1
         this.head++;
         // 返回元素
         return (E) this.queue[realHead];
+    }
+
+    /**
+     * 判断是否为空
+     *
+     * @return boolean
+     * @author pang
+     * @date 2019/9/3
+     */
+    public boolean isEmpty() {
+        if ((this.head ) % this.size == this.tail % this.size) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void main(String ... args) throws Exception {
+        BaseQueue queue=new BaseQueue(1);
+        queue.add(2);
+        System.out.println(queue.poll());
     }
 }

@@ -1,5 +1,6 @@
 package com.pang.tree;
 
+import com.pang.queue.BaseQueue;
 import com.pang.stack.BaseStack;
 
 /**
@@ -46,6 +47,7 @@ public class BaseTree {
         if (topFather == null) {
             topFather = new Node().setData(data);
             node = topFather;
+            this.treeSize++;
             return this;
         }
         // 查找目标节点
@@ -269,6 +271,38 @@ public class BaseTree {
     }
 
     /**
+     * 层序遍历
+     *
+     * @param base 根节点
+     * @author pang
+     * @date 2019/9/3
+     */
+    public void sequenceTraversal(Node base) throws Exception {
+        // 用自己实现的简单队列来做
+        BaseQueue<Node> queue = new BaseQueue<>(this.treeSize);
+        // 基础条件还是节点不为空，队列不为空
+        while (base != null || !queue.isEmpty()) {
+            if (base.getLeft() != null) {
+                // 如果有左子节点，就把左子节点添加到队列中
+                queue.add(base.getLeft());
+            }
+            if (base.getRight() != null) {
+                // 如果有右子节点，就把右子节点添加到队列中
+                queue.add(base.getRight());
+            }
+            // 输出节点信息
+            System.out.print(base.getData() + " ");
+            // 这里有点坑，当时写队列的时候把空队列写成了异常，所以这里是不是需要一个异常处理呢
+            // 答案是不用，直接在这里添加一个把base置空就好了
+            base = null;
+            // 还是这个问题，如果队列为空的时候执行Poll会导致抛出异常
+            if (!queue.isEmpty()) {
+                base = queue.poll();
+            }
+        }
+    }
+
+    /**
      * 使用内部类构建节点
      */
     private class Node {
@@ -362,7 +396,7 @@ public class BaseTree {
         return this;
     }
 
-    public static void main(String... args) {
+    public static void main(String... args) throws Exception {
         BaseTree tree = new BaseTree();
         tree.add(6).add(3).add(4).add(2).add(1).add(8).add(7).add(9);
         // tree.add(6).add(3).add(8);
@@ -379,5 +413,7 @@ public class BaseTree {
         tree.postOrderTraveral(tree.getTopFather());
         System.out.println("\n后序遍历（栈版本）");
         tree.postOrderTraveralByStatic(tree.getTopFather());
+        System.out.println("\n层序遍历");
+        tree.sequenceTraversal(tree.getTopFather());
     }
 }
