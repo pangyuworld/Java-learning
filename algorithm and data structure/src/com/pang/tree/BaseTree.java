@@ -282,7 +282,7 @@ public class BaseTree {
         BaseQueue<Node> queue = new BaseQueue<>(this.treeSize);
         // 基础条件还是节点不为空，队列不为空
         while (base != null || !queue.isEmpty()) {
-            if (base.getLeft() != null) { 
+            if (base.getLeft() != null) {
                 // 如果有左子节点，就把左子节点添加到队列中
                 queue.add(base.getLeft());
             }
