@@ -97,48 +97,58 @@ public class BinaryHeap {
     }
 
     /**
-     * 二叉堆删除堆顶元素，emmm，奇葩的设定
+     * 二叉堆取出并删除堆顶元素
+     * 这里卡住了，很久很久，因为不知道逻辑怎么写，看书也没看到
+     * 为什么卡住了，是因为再循环处的判断条件我想的过多，比如首先不是叶子结点，然后有无右子节点，左右子节点哪个比较小，还有最重要的是
+     * 如何遏制数组越界问题。
+     * 当然，最后还是解决了，大概思路就是只要有左子节点就不是叶子节点，然后再判断有无右子节点，有的话判断大小
+     * 然后如果右子节点比较小，那就和右子节点互换
+     * 如果右子节点比较大， 那就相当于没有右子节点，直接比较左子节点就就好了。
      *
      * @param
      * @return void
      * @author pang
      * @date 2019/9/3
      */
-    public BinaryHeap delete() {
+    public int poll() {
         if (this.size <= 0) {
             throw new IndexOutOfBoundsException("二叉堆为空，无法删除数据");
         }
+        int result = this.array[0];
         // 删除堆顶元素然后让最后一个元素等于堆顶元素
         this.array[0] = this.array[this.size-- - 1];
         this.array[this.size] = 0;
         // 这里初始化一个下标是因为变量好用
         int index = 0;
-        // 保存了左右节点的值，省的在写那么长的代码
-        int left = this.array[this.getLeftNode(index)];
-        int right = this.array[this.getRightNode(index)];
-        // 这里的判断条件有点多，总结起来就是，不能越界，根节点大于某个子节点
-        while (this.getRightNode(index) < this.maxArray &&
-                this.array[index] > left &&
-                this.array[index] > right) {
-            left = this.array[this.getLeftNode(index)];
-            right = this.array[this.getRightNode(index)];
-            // 运行到这里就证明确实有个子节点比根节点小，那就拿最小的子节点吧
-            if (left > right) {
-                // 左边比右边大的情况
-                // 交换数值
-                this.array[this.getRightNode(index)] = this.array[index];
-                this.array[index] = right;
-                // 下标变换
-                index = this.getRightNode(index);
-            } else {
-                // 左边比右边小的情况
-                this.array[this.getLeftNode(index)] = this.array[index];
-                this.array[index] = left;
-                // 下标变换
-                index = this.getLeftNode(index);
+        // 只要有左子节点，就证明了不是根节点
+        while (getLeftNode(index) < this.size && this.array[getLeftNode(index)] > 0) {
+            if (getRightNode(index) < this.size && this.array[getRightNode(index)] > 0 && this.array[getLeftNode(index)] > this.array[getRightNode(index)]) {
+                // 如果有右子节点且右子节点比左子节点小
+                if (this.array[getRightNode(index)] < this.array[index]) {
+                    // 然后比较根节点和右子节点，如果右子节点比根节点小，则互换
+                    int temp = this.array[getRightNode(index)];
+                    this.array[getRightNode(index)] = this.array[index];
+                    this.array[index] = temp;
+                    // 互换下标
+                    index = this.getRightNode(index);
+                    // 停止本层循环
+                    continue;
+                }
             }
+            // 没有右子节点，那就比较左子节点
+            if (this.array[getLeftNode(index)] < this.array[index]) {
+                // 然后比较根节点和右子节点，如果右子节点比根节点小，则互换
+                int temp = this.array[getLeftNode(index)];
+                this.array[getLeftNode(index)] = this.array[index];
+                this.array[index] = temp;
+                // 互换下标
+                index = this.getLeftNode(index);
+                continue;
+            }
+            // 如果根节点不小于左右子节点，则停止循环
+            break;
         }
-        return this;
+        return result;
     }
 
     /**
@@ -150,7 +160,7 @@ public class BinaryHeap {
      * @date 2019/9/3
      */
     private int getFatherNode(int index) {
-        return index / 2;
+        return (index - 1) / 2;
     }
 
     /**
@@ -162,7 +172,7 @@ public class BinaryHeap {
      * @date 2019/9/3
      */
     private int getLeftNode(int index) {
-        return (index + 1) * 2 - 1;
+        return index * 2 + 1;
     }
 
     /**
@@ -174,9 +184,26 @@ public class BinaryHeap {
      * @date 2019/9/3
      */
     private int getRightNode(int index) {
-        return (index + 1) * 2;
+        return index * 2 + 2;
     }
 
+    /**
+     * 判断是否是叶子节点
+     *
+     * @param index
+     * @return boolean
+     * @author pang
+     * @date 2019/9/5
+     */
+    private boolean isLeafNode(int index) {
+        if (this.getLeftNode(index) > this.maxArray || this.getRightNode(index) > this.maxArray) {
+            return true;
+        } else if (this.array[this.getLeftNode(index)] == 0 && this.array[this.getRightNode(index)] == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public String toString() {
@@ -198,26 +225,26 @@ public class BinaryHeap {
                 .add(2)
                 .add(1);
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
         // 下面这里出了问题，等待排查
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
-        heap.delete();
+        heap.poll();
         System.out.println(heap);
     }
 }
