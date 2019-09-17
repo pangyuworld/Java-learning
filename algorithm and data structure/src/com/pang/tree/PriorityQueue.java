@@ -91,26 +91,26 @@ public class PriorityQueue<E> {
             if (this.getRightNode(index) < this.size && this.array[this.getRightNode(index)] != null && this.array[this.getRightNode(index)]
                     .getWeight() < this.array[this.getLeftNode(index)].getWeight()) {
                 // 如果有右子节点且右子节点小于左子节点
-                if (this.array[this.getRightNode(index)].getWeight()<this.array[index].getWeight()){
+                if (this.array[this.getRightNode(index)].getWeight() < this.array[index].getWeight()) {
                     // 如果右子节点小于根节点
                     // 互换位置
-                    Node temp=this.array[index];
-                    this.array[index]=this.array[getRightNode(index)];
-                    this.array[getRightNode(index)]=temp;
+                    Node temp = this.array[index];
+                    this.array[index] = this.array[getRightNode(index)];
+                    this.array[getRightNode(index)] = temp;
                     // 互换下标
-                    index=getRightNode(index);
+                    index = getRightNode(index);
                     // 停止循环
                     continue;
                 }
             }
-            if (this.array[this.getLeftNode(index)].getWeight()<this.array[index].getWeight()){
+            if (this.array[this.getLeftNode(index)].getWeight() < this.array[index].getWeight()) {
                 // 如果左子节点小于根节点
                 // 互换位置
-                Node temp=this.array[index];
-                this.array[index]=this.array[getLeftNode(index)];
-                this.array[getLeftNode(index)]=temp;
+                Node temp = this.array[index];
+                this.array[index] = this.array[getLeftNode(index)];
+                this.array[getLeftNode(index)] = temp;
                 // 互换下标
-                index=getLeftNode(index);
+                index = getLeftNode(index);
                 // 停止循环
                 continue;
             }
