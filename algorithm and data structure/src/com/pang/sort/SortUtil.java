@@ -243,9 +243,17 @@ public class SortUtil {
         quickSort(array, 0, array.length - 1);
     }
 
+    /**
+     *  快排非递归实现
+     * @author pang
+     * @date 2019/9/17
+     * @param array 目标数组
+     * @param low 左边界
+     * @param high 右边界
+     */
     public static void quickSortByStatic(int[] array, int low, int high) {
-        // 使用自己的栈,开二倍大小是因为左右的值都要存
-        BaseStack<Integer> stack = new BaseStack<>(array.length * 5);
+        // 使用自己的栈,开二倍大小是因为左右的值都要存，如果是一倍的话，可能会出现爆栈情况
+        BaseStack<Integer> stack = new BaseStack<>(array.length *2);
         // 把边界保存在栈中，注意，一定是先保存左边然后再保存右边
         stack.push(low);
         stack.push(high);
