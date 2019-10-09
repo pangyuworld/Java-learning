@@ -12,10 +12,10 @@ import org.junit.jupiter.api.Test;
  */
 public class FactoryTest {
     @Test
-    public void test(){
-        CarFactory factory=new AudiFactory();
+    public void test() {
+        CarFactory factory = new AudiFactory();
         factory.buildCar();
-        CarFactory factory1=new Mercedes();
+        CarFactory factory1 = new Mercedes();
         factory1.buildCar();
         StringBuilder stringBuilder = new StringBuilder("|");
         System.out.println(stringBuilder);

@@ -10,7 +10,7 @@ package com.pang.prototype.tutorial;
  */
 public class Triangle extends Shape {
     public Triangle() {
-        type="三角形";
+        type = "三角形";
     }
 
     @Override

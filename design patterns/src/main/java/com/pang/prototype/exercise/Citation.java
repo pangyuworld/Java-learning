@@ -26,24 +26,24 @@ public class Citation implements Cloneable, Serializable {
     }
 
     @Override
-    protected Object clone(){
+    protected Object clone() {
         ByteArrayOutputStream bos = null;
         ObjectOutputStream oos = null;
         ByteArrayInputStream bis = null;
         ObjectInputStream ois = null;
         Object clone = null;
-        try{
-            bos=new ByteArrayOutputStream();
-            oos=new ObjectOutputStream(bos);
+        try {
+            bos = new ByteArrayOutputStream();
+            oos = new ObjectOutputStream(bos);
             oos.writeObject(this);
-            
-            bis=new ByteArrayInputStream(bos.toByteArray());
-            ois=new ObjectInputStream(bis);
-            clone= ois.read();
+
+            bis = new ByteArrayInputStream(bos.toByteArray());
+            ois = new ObjectInputStream(bis);
+            clone = ois.read();
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 bos.close();
                 oos.close();

@@ -9,17 +9,17 @@ package com.pang.factory.tutorial;
  * @date 2019/10/7 12:34
  */
 public class ShapeFactory {
-    public Shape getShape(String shapeType){
-        if (shapeType==null){
+    public Shape getShape(String shapeType) {
+        if (shapeType == null) {
             return null;
         }
-        if ("circle".equalsIgnoreCase(shapeType)){
+        if ("circle".equalsIgnoreCase(shapeType)) {
             return new Circle();
         }
-        if ("square".equalsIgnoreCase(shapeType)){
+        if ("square".equalsIgnoreCase(shapeType)) {
             return new Square();
         }
-        if ("Rectangle".equalsIgnoreCase(shapeType)){
+        if ("Rectangle".equalsIgnoreCase(shapeType)) {
             return new Rectangle();
         }
         return null;

@@ -12,23 +12,23 @@ import org.junit.jupiter.api.Test;
  */
 public class Main {
     @Test
-    public void test(){
+    public void test() {
         ShapeCache.loadCache();
 
-        Shape shape=ShapeCache.getShape("1");
+        Shape shape = ShapeCache.getShape("1");
         System.out.println(shape.getType());
         shape.deaw();
         System.out.println(shape);
-        shape=ShapeCache.getShape("2");
+        shape = ShapeCache.getShape("2");
         System.out.println(shape.getType());
         shape.deaw();
         System.out.println(shape);
-        shape=ShapeCache.getShape("3");
+        shape = ShapeCache.getShape("3");
         System.out.println(shape.getType());
         shape.deaw();
         System.out.println(shape);
         System.out.println("----------------");
-        shape=ShapeCache.getShape("1");
+        shape = ShapeCache.getShape("1");
         System.out.println(shape.getType());
         shape.deaw();
         System.out.println(shape);

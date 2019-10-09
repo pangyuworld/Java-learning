@@ -12,16 +12,16 @@ import org.junit.jupiter.api.Test;
  */
 public class Main {
     @Test
-    public void main(){
-        ShapeFactory shapeFactory=new ShapeFactory();
+    public void main() {
+        ShapeFactory shapeFactory = new ShapeFactory();
 
-        Shape shape1=shapeFactory.getShape("circle");
+        Shape shape1 = shapeFactory.getShape("circle");
         shape1.draw();
 
-        Shape shape2=shapeFactory.getShape("square");
+        Shape shape2 = shapeFactory.getShape("square");
         shape2.draw();
 
-        Shape shape3=shapeFactory.getShape("rectangle");
+        Shape shape3 = shapeFactory.getShape("rectangle");
         shape3.draw();
     }
 }

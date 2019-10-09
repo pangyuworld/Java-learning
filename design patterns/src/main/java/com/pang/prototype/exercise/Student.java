@@ -12,22 +12,22 @@ import java.io.Serializable;
  */
 public class Student implements Serializable {
 
-	private static final long serialVersionUID=2L;
-	private String studentName="张星宇";
+    private static final long serialVersionUID = 2L;
+    private String studentName = "张星宇";
 
-	public String getStudentName() {
-		return studentName;
-	}
+    public String getStudentName() {
+        return studentName;
+    }
 
-	public Student setStudentName(String studentName) {
-		this.studentName = studentName;
-		return this;
-	}
+    public Student setStudentName(String studentName) {
+        this.studentName = studentName;
+        return this;
+    }
 
-	@Override
-	public String toString() {
-		return "Student{" +
-				"studentName='" + studentName + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentName='" + studentName + '\'' +
+                '}';
+    }
 }

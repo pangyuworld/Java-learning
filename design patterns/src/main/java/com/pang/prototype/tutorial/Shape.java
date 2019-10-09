@@ -8,7 +8,7 @@ package com.pang.prototype.tutorial;
  * @description:
  * @date 2019/10/7 11:45
  */
-public abstract class Shape implements Cloneable{
+public abstract class Shape implements Cloneable {
     private String id;
     protected String type;
 
@@ -33,10 +33,10 @@ public abstract class Shape implements Cloneable{
     }
 
     @Override
-    public Object clone(){
-        Object clone=null;
-        try{
-            clone=super.clone();
+    public Object clone() {
+        Object clone = null;
+        try {
+            clone = super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }

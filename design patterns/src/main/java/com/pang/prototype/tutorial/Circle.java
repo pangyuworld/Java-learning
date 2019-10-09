@@ -9,9 +9,10 @@ package com.pang.prototype.tutorial;
  * @date 2019/10/7 11:49
  */
 public class Circle extends Shape {
-    public Circle(){
-        type="Circle";
+    public Circle() {
+        type = "Circle";
     }
+
     @Override
     void deaw() {
         System.out.println("画了圆形");
