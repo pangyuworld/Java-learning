@@ -1,17 +1,17 @@
-package com.pang.bridge.tutorial;
+package com.pang.bridge;
 
 /**
  * @author pang
  * @version V1.0
- * @ClassName: BlueColor
+ * @ClassName: RedColor
  * @Package com.pang.bridge.tutorial
  * @description:
  * @date 2019/10/10 13:16
  */
-public class BlueColor implements Color {
+public class RedColor implements Color {
     @Override
     public String getColor() {
-        System.out.println("获得了蓝色");
-        return "蓝色";
+        System.out.println("获得了红色");
+        return "红色";
     }
 }

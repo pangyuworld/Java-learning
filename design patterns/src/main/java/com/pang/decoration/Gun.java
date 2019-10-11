@@ -1,4 +1,4 @@
-package com.pang.decoration.tutorial;
+package com.pang.decoration;
 
 /**
  * @author pang

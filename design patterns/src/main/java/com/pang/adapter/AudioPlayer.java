@@ -1,4 +1,4 @@
-package com.pang.adapter.tutorial;
+package com.pang.adapter;
 
 /**
  * @author pang

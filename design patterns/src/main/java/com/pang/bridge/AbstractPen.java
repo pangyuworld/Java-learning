@@ -1,4 +1,4 @@
-package com.pang.bridge.tutorial;
+package com.pang.bridge;
 
 /**
  * @author pang

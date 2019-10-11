@@ -1,4 +1,4 @@
-package com.pang.decoration.tutorial;
+package com.pang.decoration;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
  * @author pang
  * @version V1.0
  * @ClassName: Client
- * @Package com.pang.decoration.tutorial
+ * @Package com.pang.decoration
  * @description:
  * @date 2019/10/10 14:52
  */

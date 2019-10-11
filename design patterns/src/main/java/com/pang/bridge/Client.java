@@ -1,4 +1,4 @@
-package com.pang.bridge.tutorial;
+package com.pang.bridge;
 
 import org.junit.jupiter.api.Test;
 
