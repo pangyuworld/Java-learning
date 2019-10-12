@@ -11,6 +11,7 @@ import java.util.Arrays;
  * @date 2019/7/4 11:00
  */
 public class BaseArray<E> {
+
     /**
      * 对象内置的数组
      */

@@ -55,7 +55,7 @@ public class PriorityQueue<E> {
         // 创建一个临时引用，方便交换
         Node node;
         // 然后把数据插入到叶子节点
-        this.array[this.size++] = new Node<>(wegtht, element);
+        this.array[this.size++] = new Node<E>(wegtht, element);
         // 然后下面就要根据权值来调整整个树结构
         while (this.array[index].getWeight() < this.array[this.getFatherNode(index)].getWeight()) {
             // 交换值
