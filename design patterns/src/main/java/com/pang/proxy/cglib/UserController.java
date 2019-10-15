@@ -9,15 +9,33 @@ package com.pang.proxy.cglib;
  * @date 2019/10/12 15:49
  */
 public class UserController {
+    /**
+     * 用户名
+     */
     private String userName;
+    /**
+     * 登录状态
+     */
     private static boolean loginStatus;
 
+    /**
+     * 无参构造方法，初始化字段
+     *
+     * @author pang
+     * @date 2019/10/13
+     */
     public UserController() {
         userName = "default user name";
         loginStatus = false;
     }
 
-    public  void login() {
+    /**
+     * 用户进行登录
+     *
+     * @author pang
+     * @date 2019/10/13
+     */
+    public void login() {
         System.out.println("用户进行登录");
         loginStatus = true;
     }
