@@ -1,5 +1,7 @@
 package com.pang.command;
 
+import java.util.Observable;
+
 /**
  * @author pang
  * @version V1.0

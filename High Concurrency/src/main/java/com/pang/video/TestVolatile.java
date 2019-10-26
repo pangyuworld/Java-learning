@@ -8,8 +8,8 @@ package com.pang.video;
  * @description: volatile 关键字视频例程
  * @date 2019/10/18 10:11
  * 内存可见性：当多个线程操作共享数据时候，彼此不可见
- *      大概是程序有个主存，然后每个线程都有自己的独立缓存，程序在线程中进行读写操作的时候，都要先从主存中获取数据，然后进行操作
- *      使用了volatile关键字，可以理解为所有的数据操作都是在主存中进行的
+ * 大概是程序有个主存，然后每个线程都有自己的独立缓存，程序在线程中进行读写操作的时候，都要先从主存中获取数据，然后进行操作
+ * 使用了volatile关键字，可以理解为所有的数据操作都是在主存中进行的
  */
 public class TestVolatile {
 
@@ -28,13 +28,10 @@ public class TestVolatile {
          *      volatile不能保证变量的“原子性”
          */
         while (true) {
-            // synchronized (td) {
-                if (td.isFlag()) {
-                    System.out.println("--------------");
-                    break;
-                }
-            // }
-            // Thread.sleep(1);
+            if (td.isFlag()) {
+                System.out.println("--------------");
+                break;
+            }
         }
     }
 

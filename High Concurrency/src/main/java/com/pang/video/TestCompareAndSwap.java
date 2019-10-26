@@ -11,7 +11,7 @@ package com.pang.video;
 @SuppressWarnings("AlibabaAvoidManuallyCreateThread")
 public class TestCompareAndSwap {
     public static void main(String...args){
-        final CompareAAndSwap cas=new CompareAAndSwap();
+        final CompareAndSwap cas=new CompareAndSwap();
         for (int i=0;i<10;i++){
             new Thread(new Runnable() {
                 @Override
@@ -24,7 +24,7 @@ public class TestCompareAndSwap {
     }
 }
 
-class CompareAAndSwap {
+class CompareAndSwap {
     private int value;
 
     // 获取内存值
