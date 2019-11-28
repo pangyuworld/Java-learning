@@ -10,5 +10,4 @@ package com.pang.decoration;
  */
 public interface Gun {
     void fire();
-
 }

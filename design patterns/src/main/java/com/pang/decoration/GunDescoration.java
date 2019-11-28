@@ -9,6 +9,7 @@ package com.pang.decoration;
  * @date 2019/10/10 14:43
  */
 public class GunDescoration implements Gun{
+    // 这里聚合了一个Gun
     private Gun gun;
 
     public GunDescoration(Gun gun) {

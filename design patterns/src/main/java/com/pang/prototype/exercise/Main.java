@@ -13,8 +13,10 @@ import org.junit.jupiter.api.Test;
 public class Main {
     @Test
     public void test() throws CloneNotSupportedException {
+
         Certificate certificate = new Certificate();
         Certificate certificate2 = (Certificate) certificate.clone();
+
         certificate.getWinner().setStudentName("小胖儿");
         System.out.println(certificate);
 

@@ -1,8 +1,5 @@
 package com.pang.proxy.dynamic;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
@@ -30,32 +27,29 @@ public class ProxyFactory {
          * 3. InvocationHandler h事件处理，执行目标对象时候，会触发处理器方法，相当于代理了方法
          */
         return Proxy.newProxyInstance(targer.getClass().getClassLoader(), targer.getClass()
-                .getInterfaces(), new InvocationHandler() {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws InvocationTargetException, IllegalAccessException {
-                // 获取token注解
-                Token token = method.getAnnotation(Token.class);
-                if (token != null) {
-                    System.out.println("存在token注解，需要进行验证");
-                    // 如果存在注解，那就开始进行验证
-                    if (StaticValue.loginStatus) {
-                        // 如果登陆了的话，那就执行
-                        System.out.println("验证通过，有权限执行当前方法");
-                        Object resultVal = method.invoke(targer, args);
-                        System.out.println("执行完成");
-                        return resultVal;
-                    } else {
-                        // 如果没有登录，那就不通过
-                        System.out.println("验证没有通过");
-                        return null;
-                    }
-                } else {
-                    System.out.println("不存在token注解，不用验证");
-                    System.out.println("执行方法前");
+                .getInterfaces(), (proxy, method, args) -> {
+            // 获取token注解
+            Token token = method.getAnnotation(Token.class);
+            if (token != null) {
+                System.out.println("存在token注解，需要进行验证");
+                // 如果存在注解，那就开始进行验证
+                if (StaticValue.loginStatus) {
+                    // 如果登陆了的话，那就执行
+                    System.out.println("验证通过，有权限执行当前方法");
                     Object resultVal = method.invoke(targer, args);
-                    System.out.println("执行完方法");
+                    System.out.println("执行完成");
                     return resultVal;
+                } else {
+                    // 如果没有登录，那就不通过
+                    System.out.println("验证没有通过");
+                    return null;
                 }
+            } else {
+                System.out.println("不存在token注解，不用验证");
+                System.out.println("执行方法前");
+                Object resultVal = method.invoke(targer, args);
+                System.out.println("执行完方法");
+                return resultVal;
             }
         });
     }
