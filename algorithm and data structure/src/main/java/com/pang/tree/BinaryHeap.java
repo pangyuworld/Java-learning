@@ -41,7 +41,6 @@ public class BinaryHeap {
      * 从数组构建一个二叉树，不能添加数据
      *
      * @param array 数组
-     * @return
      * @author pang
      * @date 2019/9/3
      */
@@ -55,9 +54,6 @@ public class BinaryHeap {
     /**
      * 从数组构建一个二叉树且可自定义大小
      *
-     * @param maxArray
-     * @param array
-     * @return
      * @author pang
      * @date 2019/9/4
      */
@@ -71,7 +67,6 @@ public class BinaryHeap {
     /**
      * 向二叉堆插入一条数据
      *
-     * @param data
      * @return void
      * @author pang
      * @date 2019/9/3
@@ -97,15 +92,10 @@ public class BinaryHeap {
     }
 
     /**
-     * 二叉堆取出并删除堆顶元素
-     * 这里卡住了，很久很久，因为不知道逻辑怎么写，看书也没看到
-     * 为什么卡住了，是因为再循环处的判断条件我想的过多，比如首先不是叶子结点，然后有无右子节点，左右子节点哪个比较小，还有最重要的是
-     * 如何遏制数组越界问题。
-     * 当然，最后还是解决了，大概思路就是只要有左子节点就不是叶子节点，然后再判断有无右子节点，有的话判断大小
-     * 然后如果右子节点比较小，那就和右子节点互换
-     * 如果右子节点比较大， 那就相当于没有右子节点，直接比较左子节点就就好了。
+     * 二叉堆取出并删除堆顶元素 这里卡住了，很久很久，因为不知道逻辑怎么写，看书也没看到 为什么卡住了，是因为再循环处的判断条件我想的过多，比如首先不是叶子结点，然后有无右子节点，左右子节点哪个比较小，还有最重要的是
+     * 如何遏制数组越界问题。 当然，最后还是解决了，大概思路就是只要有左子节点就不是叶子节点，然后再判断有无右子节点，有的话判断大小 然后如果右子节点比较小，那就和右子节点互换 如果右子节点比较大，
+     * 那就相当于没有右子节点，直接比较左子节点就就好了。
      *
-     * @param
      * @return void
      * @author pang
      * @date 2019/9/3
@@ -122,7 +112,9 @@ public class BinaryHeap {
         int index = 0;
         // 只要有左子节点，就证明了不是根节点
         while (getLeftNode(index) < this.size && this.array[getLeftNode(index)] > 0) {
-            if (getRightNode(index) < this.size && this.array[getRightNode(index)] > 0 && this.array[getLeftNode(index)] > this.array[getRightNode(index)]) {
+            if (getRightNode(index) < this.size
+                    && this.array[getRightNode(index)] > 0
+                    && this.array[getLeftNode(index)] > this.array[getRightNode(index)]) {
                 // 如果有右子节点且右子节点比左子节点小
                 if (this.array[getRightNode(index)] < this.array[index]) {
                     // 然后比较根节点和右子节点，如果右子节点比根节点小，则互换
@@ -190,7 +182,6 @@ public class BinaryHeap {
     /**
      * 判断是否是叶子节点
      *
-     * @param index
      * @return boolean
      * @author pang
      * @date 2019/9/5
@@ -214,35 +205,33 @@ public class BinaryHeap {
 
     public static void main(String... args) {
         BinaryHeap heap = new BinaryHeap(10);
-        heap.add(10)
-                .add(9)
-                .add(8)
-                .add(7)
-                .add(6)
-                .add(5)
+        heap.add(1)
                 .add(4)
+                .add(5)
+                .add(1)
                 .add(3)
+                .add(4)
                 .add(2)
-                .add(1);
+                .add(6);
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
         // 下面这里出了问题，等待排查
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
-        heap.poll();
+        System.out.println(heap.poll());
         System.out.println(heap);
         heap.poll();
         System.out.println(heap);

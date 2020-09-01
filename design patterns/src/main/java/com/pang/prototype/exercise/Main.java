@@ -1,6 +1,5 @@
 package com.pang.prototype.exercise;
 
-import org.junit.jupiter.api.Test;
 
 /**
  * @author pang
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
  * @date 2019/10/7 12:08
  */
 public class Main {
-    @Test
     public void test() throws CloneNotSupportedException {
 
         Certificate certificate = new Certificate();

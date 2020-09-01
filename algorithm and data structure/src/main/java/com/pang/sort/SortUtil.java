@@ -125,7 +125,6 @@ public class SortUtil {
     /**
      * 冒泡排序第二部优化
      *
-     * @param array
      * @author pang
      * @date 2019/9/10
      */
@@ -244,16 +243,17 @@ public class SortUtil {
     }
 
     /**
-     *  快排非递归实现
+     * 快排非递归实现
+     *
+     * @param array 目标数组
+     * @param low   左边界
+     * @param high  右边界
      * @author pang
      * @date 2019/9/17
-     * @param array 目标数组
-     * @param low 左边界
-     * @param high 右边界
      */
     public static void quickSortByStatic(int[] array, int low, int high) {
         // 使用自己的栈,开二倍大小是因为左右的值都要存，如果是一倍的话，可能会出现爆栈情况
-        BaseStack<Integer> stack = new BaseStack<>(array.length *2);
+        BaseStack<Integer> stack = new BaseStack<>(array.length * 2);
         // 把边界保存在栈中，注意，一定是先保存左边然后再保存右边
         stack.push(low);
         stack.push(high);
@@ -315,13 +315,71 @@ public class SortUtil {
         quickSortByStatic(array, 0, array.length - 1);
     }
 
+    /**
+     * 直接插入排序
+     *
+     * @param array 目标数组
+     * @param left  左边界
+     * @param right 右边界
+     */
+    public static void innerSort(int[] array, int left, int right) {
+        for (int i = left + 1; i <= right; i++) {
+            int j = i;
+            int temp = array[i];
+            while (j > 0 && temp < array[j - 1]) {
+                array[j] = array[j - 1];
+                j--;
+            }
+            array[j] = temp;
+        }
+    }
+
+    /**
+     * 直接插入排序
+     *
+     * @param array 目标数组
+     */
+    public static void innerSort(int[] array) {
+        innerSort(array, 0, array.length - 1);
+    }
+
+    /**
+     * 希尔排序
+     *
+     * @param array 目标数组
+     * @param left  左边界
+     * @param right 右边界
+     */
+    public static void shellSort(int[] array, int left, int right) {
+        int n = (right - left + 1) / 2;
+        for (int i = left + n; n > 0; n /= 2) {
+            // i是后面的,j是开始的
+            int j = left * 2 + n - i;
+            int temp = array[i];
+            while (j >= left && array[j] > temp) {
+                array[i] = array[j];
+                j -= n;
+            }
+            array[j + n] = temp;
+        }
+    }
+
+    /**
+     * 希尔排序
+     *
+     * @param array 目标数组
+     */
+    public static void shellSort(int[] array) {
+        shellSort(array, 0, array.length - 1);
+    }
+
     public static void main(String... args) {
         int[] array = new int[10];
         int[] temp;
-        for (int i = 0; i < 10; i++) {
-            array[i] = (int) (Math.random() * 100);
-        }
-        // array = new int[]{22, 68, 96, 43, 40, 18, 51, 7, 99, 18};
+        // for (int i = 0; i < 10; i++) {
+        //     array[i] = (int) (Math.random() * 100);
+        // }
+        array = new int[]{8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
         System.out.println("原数组");
         temp = array.clone();
         print(temp);
@@ -353,12 +411,27 @@ public class SortUtil {
         temp = array.clone();
         Arrays.sort(temp);
         print(temp);
+        System.out.println("插入排序后");
+        temp = array.clone();
+        innerSort(temp);
+        print(temp);
+        System.out.println("标准答案");
+        temp = array.clone();
+        Arrays.sort(temp);
+        print(temp);
+        System.out.println("插入排序后");
+        temp = array.clone();
+        shellSort(temp);
+        print(temp);
+        System.out.println("标准答案");
+        temp = array.clone();
+        Arrays.sort(temp);
+        print(temp);
     }
 
     /**
      * 输出数组，因为太麻烦了，所以写个函数方便一些
      *
-     * @param array
      * @author pang
      * @date 2019/9/10
      */
